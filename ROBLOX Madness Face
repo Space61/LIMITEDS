@@ -1,0 +1,23 @@
+function AttachFaceToHead(player, faceId)
+    local character = player.Character
+    if character then
+        local head = character:FindFirstChild("Head")
+        local face = game:GetObjects("rbxassetid://" .. tostring(faceId))[1]
+
+        if head and face then
+            -- Remove existing faces
+            for _, existingFace in ipairs(head:GetChildren()) do
+                if existingFace:IsA("Decal") then
+                    existingFace:Destroy()
+                end
+            end
+
+            -- Attach the new face
+            local faceClone = face:Clone()
+            faceClone.Parent = head
+        end
+    end
+end
+
+local faceId = 130213380
+AttachFaceToHead(game.Players.LocalPlayer, faceId)
